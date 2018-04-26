@@ -63,6 +63,14 @@ c.refresh_access_token(
 )
 ```
 
+#### Revoking the access token
+
+This method revokes the passed access token.
+
+```
+self.c.revoke_token(tokens.get("access_token"))
+```
+
 #### SC2 api to interact with the chain
 
 Once you get the access token, you can create a new Client instance with just access_token.
@@ -80,6 +88,24 @@ This endpoint returns information about the authorized user.
 ```
 print(c.me())
 ```
+
+#### Updating user metadata
+
+Updates the metadata of authorized user.
+
+```
+metadata = {
+    "profile": {
+        "name": "Emre", 
+        "location": "Istanbul, Turkey",
+        "about": "Developer, STEEM witness.",
+        "profile_image": "http://foo.bar/image.png"
+    }
+}
+
+resp = self.c.update_user_metadata(metadata)
+```
+
 
 #### /broadcast endpoint
 
@@ -183,5 +209,29 @@ custom_json = CustomJson(
     json_structure,
 )
 c.broadcast([custom_json.to_operation_structure()])
+```
+
+#### Hot Signing Links
+
+hot_sign() method creates a SteemConnect specific URL which you can redirect users and expect them 
+to broadcast operations are not supported in the api. (transfer, create_delegation, etc.)
+
+It has an optional **redirect_uri** parameter. If you pass that information, SteemConnect will redirect 
+the user to that URL after the operation succeeds.
+
+Example usage:
 
 ```
+url = self.c.hot_sign(
+    "transfer",
+    {
+        "to": "emreberyler",
+        "amount": "0.001 SBD",
+        "memo": "Donation",
+    },
+    redirect_uri="http://localhost"
+)
+```
+
+This will generate [this URL](https://v2.steemconnect.com/sign/transfer?to=emrebeyler&amount=1+SBD&memo=Donation), (which sends 1 SBD to me with a memo as "Donation".)
+
