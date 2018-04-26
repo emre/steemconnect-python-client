@@ -76,7 +76,6 @@ class Client:
         except ValueError:
             return r.content
 
-
     @requires_client_id_and_secret
     def refresh_access_token(self, refresh_token, scope):
         post_data = {
@@ -92,3 +91,44 @@ class Client:
         )
 
         return r.json()
+
+    def revoke_token(self, access_token):
+        post_data = {
+            "access_token": access_token,
+        }
+
+        r = requests.post(
+            urllib.parse.urljoin(self.sc2_api_base_url, "oauth2/token/revoke"),
+            data=post_data
+        )
+
+        return r.json()
+
+    @requires_access_token
+    def update_user_metadata(self, metadata):
+        put_data = {
+            "user_metadata": metadata,
+        }
+        r = requests.put(
+            urllib.parse.urljoin(self.sc2_api_base_url, "me/"),
+            data=put_data, headers=self.headers)
+
+        return r.json()
+
+    def hot_sign(self, operation, params, redirect_uri=None):
+
+        if not isinstance(operation, str) or not isinstance(params, dict):
+            raise ValueError("Invalid Request.")
+
+        base_url = self.sc2_api_base_url.replace("/api", "")
+
+        if redirect_uri:
+            params.update({"redirect_uri": redirect_uri})
+
+        params = urllib.parse.urlencode(params)
+        url = urllib.parse.urljoin(base_url, "sign/%s" % operation)
+        url += "?" + params
+
+        return url
+
+

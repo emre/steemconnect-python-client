@@ -234,6 +234,41 @@ class TestClient(unittest.TestCase):
         self.assertEqual(custom_json.custom_operation_id, "testcustomjson")
         self.assertEqual(custom_json.structure, {"foo": "<i>bar"})
 
+    def test_hot_sign(self):
+        c = Client()
+
+        sign_url = c.hot_sign(
+            "transfer",
+            {
+                "to": "turbot",
+                "amount": "0.001 SBD",
+                "memo": "selam",
+            },
+            redirect_uri="http://localhost"
+        )
+
+        self.assertEqual(sign_url, "https://v2.steemconnect.com/sign/tra"
+                                   "nsfer?to=turbot&amount=0.001+SBD&me"
+                                   "mo=selam&redirect_uri=http%3A%2F%2F"
+                                   "localhost")
+
+    def test_hot_sign_without_redirect_uri(self):
+        c = Client()
+
+        sign_url = c.hot_sign(
+            "transfer",
+            {
+                "to": "turbot",
+                "amount": "0.001 SBD",
+                "memo": "selam",
+            },
+        )
+
+        self.assertEqual(sign_url, "https://v2.steemconnect.com/sign/tra"
+                                   "nsfer?to=turbot&amount=0.001+SBD&me"
+                                   "mo=selam")
+
+
 
 if __name__ == '__main__':
     unittest.main()
