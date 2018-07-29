@@ -38,7 +38,7 @@ class Comment:
         return [
             "comment", {
                 "parent_author": self.parent_author or "",
-                "parent_permlink": "test",
+                "parent_permlink": self.parent_permlink,
                 "author": self.author,
                 "permlink": self.permlink,
                 "title": self.title or "",
@@ -60,7 +60,7 @@ class CommentOptions:
         else:
             self.author = author
             self.permlink = permlink
-        self.extensions = extensions or "",
+        self.extensions = extensions or []
         self.allow_curation_rewards = allow_curation_rewards is True or False
         self.max_accepted_payout = max_accepted_payout or "1000.000 SBD"
         self.percent_steem_dollars = percent_steem_dollars or 10000
@@ -75,6 +75,7 @@ class CommentOptions:
                 "max_accepted_payout": self.max_accepted_payout,
                 "percent_steem_dollars": self.percent_steem_dollars,
                 "allow_votes": self.allow_votes,
+                "extensions": self.extensions,
             }
         ]
 

@@ -150,7 +150,7 @@ comment_options = CommentOptions(
 
 c.broadcast([
 	comment.to_operation_structure(),
-	comment_options. comment.to_operation_structure()
+	comment_options.to_operation_structure()
 ])
 
 ```
@@ -226,7 +226,7 @@ url = self.c.hot_sign(
     "transfer",
     {
         "to": "emreberyler",
-        "amount": "0.001 SBD",
+        "amount": "1 SBD",
         "memo": "Donation",
     },
     redirect_uri="http://localhost"
