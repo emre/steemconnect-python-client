@@ -55,7 +55,7 @@ via steemconnect's broadcast apis.
 
 
 .. note::
-    All operations lives inside the **steemconnect.operations** module. You need to import the corresponding classes before using them.
+    All operations live inside the **steemconnect.operations** module. You need to import the corresponding classes before using them.
 
 
 Voting for a post
