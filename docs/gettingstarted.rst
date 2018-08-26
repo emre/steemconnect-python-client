@@ -16,7 +16,7 @@ From that point, you can use this access token to broadcast operations on user's
 Code authorization flow
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-access tokens has a short TTL on Oauth standards. Every time a user has their token expired, you have to choices:
+access tokens has a short TTL on Oauth standards. Every time a user has their token expired, you have two choices:
 
 - Re-log the user and get a fresh token
 - Add "offline" scope to the required scopes and get a refresh token to refresh the access tokens.
