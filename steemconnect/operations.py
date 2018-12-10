@@ -61,7 +61,7 @@ class CommentOptions:
             self.author = author
             self.permlink = permlink
         self.extensions = extensions or []
-        self.allow_curation_rewards = allow_curation_rewards is True or False
+        self.allow_curation_rewards = allow_curation_rewards or True
         self.max_accepted_payout = max_accepted_payout or "1000.000 SBD"
         self.percent_steem_dollars = percent_steem_dollars or 10000
         self.allow_votes = allow_votes or True

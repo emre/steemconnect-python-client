@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='steemconnect',
-    version='0.0.4',
+    version='0.0.5',
     packages=['steemconnect'],
     url='https://github.com/emre/steemconnect',
     license='MIT',
