@@ -52,7 +52,7 @@ class CommentOptions:
 
     def __init__(self, author=None, permlink=None, extensions=None,
                  allow_curation_rewards=None, max_accepted_payout=None,
-                 percent_steem_dollars=None, allow_votes=True,
+                 percent_steem_dollars=0, allow_votes=True,
                  parent_comment=None):
         if parent_comment:
             self.author = parent_comment.author
@@ -63,7 +63,7 @@ class CommentOptions:
         self.extensions = extensions or []
         self.allow_curation_rewards = allow_curation_rewards or True
         self.max_accepted_payout = max_accepted_payout or "1000.000 SBD"
-        self.percent_steem_dollars = percent_steem_dollars or 10000
+        self.percent_steem_dollars = percent_steem_dollars
         self.allow_votes = allow_votes or True
 
     def to_operation_structure(self):
